@@ -49,7 +49,7 @@ class Bird():
 
     # afficher l'oiseau sur l'écran
     def draw(self, screen):
-        screen.blit(self.image, self.rect)
+        screen.blit(self.image, (self.rect.x,self.rect.y))
 
 
 '''
