@@ -2,8 +2,8 @@ import pygame
 from bird import Bird
 
 class Game:
-    def __init__(self,screen):
-        self.screen=screen
+    def __init__(self,width,lenght):
+        self.screen=pygame.display.set_mode((width,lenght))
         self.running=True
         self.bird=Bird()
         self.clock=pygame.time.Clock()
@@ -29,6 +29,6 @@ class Game:
             self.display()
 
 
-screen=pygame.display.set_mode((950,520))
-game=Game(screen)
+
+game=Game(950,520)
 game.run()
