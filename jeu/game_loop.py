@@ -8,7 +8,8 @@ class Game:
         self.bird=Bird()
         self.clock=pygame.time.Clock()
         self.bird=Bird()
-    
+        self.background=pygame.image.load("sprites/fond.png").convert()
+        
     def handling_events(self):
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
@@ -18,8 +19,9 @@ class Game:
         pass
     
     def display(self):
-        pass
-             
+        self.screen.blit(self.background,(0,0))
+        pygame.display.flip() 
+           
     def run(self):
         while self.running:
             self.handling_events()
@@ -27,6 +29,6 @@ class Game:
             self.display()
 
 
-screen=pygame.display.set_mode((1080,720))
+screen=pygame.display.set_mode((950,520))
 game=Game(screen)
 game.run()
