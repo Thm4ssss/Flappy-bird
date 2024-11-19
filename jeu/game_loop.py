@@ -1,7 +1,11 @@
 import pygame
 from bird import Bird
 from pipe import Pipe
+<<<<<<< HEAD
 from ground import ground
+=======
+from background import Background
+>>>>>>> Macéo_bg
 import random
 
 
@@ -16,8 +20,14 @@ class Game:
         self.bird = Bird(40, 300, './sprites/bird_base/bird_base1.png', './sprites/bird_base/bird_base2.png',
                          './sprites/bird_base/bird_base3.png', './sprites/bird_base/bird_base4.png', 0.5, length)
         self.clock = pygame.time.Clock()
+<<<<<<< HEAD
         self.background = pygame.image.load("Backgrounds/fond_base.png").convert()
         self.pipes = [Pipe(self.width, random.randint(100,200),self.length,random.randint(100,300))]  # Générer un tuyau avec une hauteur aléatoire
+=======
+        self.background = Background('jungle')
+        # Générer un tuyau avec une hauteur aléatoire
+        self.pipes = [Pipe(self.width, random.randint(60,  100))]
+>>>>>>> Macéo_bg
         self.pipe_spawn_timer = 0  # Timer pour générer les tuyaux
         self.ground = ground(self.screen) # Importe le sol
         self.dev = True
@@ -37,7 +47,7 @@ class Game:
         self.ground.update() # Met à jour le sol
         for pipe in self.pipes:
             pipe.update_pipe()  # Mettre à jour les tuyaux
-
+        self.background.update()  # Mettre à jour le background
         # Retirer les tuyaux sortis de l'écran
         self.pipes = [pipe for pipe in self.pipes if pipe.x + pipe.width > 0]
 
@@ -56,6 +66,7 @@ class Game:
             self.running = False
 
     def display(self):
+<<<<<<< HEAD
         if self.dev:
             self.screen.fill((0,0,0))
             pygame.draw.rect(self.screen, (255,0,0), self.bird.rect, 2)
@@ -71,6 +82,13 @@ class Game:
                 pipe.display_pipe(self.screen)  # Dessiner les tuyaux
             self.ground.draw(self.screen) # Dessine le sol
             pygame.display.flip()
+=======
+        self.screen.blit(self.background.image, (0, 0))  # Dessiner le fond
+        self.bird.draw(self.screen)  # Dessiner l'oiseau
+        for pipe in self.pipes:
+            pipe.display_pipe(self.screen)  # Dessiner les tuyaux
+        pygame.display.flip()
+>>>>>>> Macéo_bg
 
     def run(self):
         while self.running:
