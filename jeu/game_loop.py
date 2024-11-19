@@ -10,7 +10,7 @@ class Game:
     # Constructeur de la classe game, permet de définir toutes les variables utiles au bon fonctionnement du jeu
     def __init__(self, width, length):
         pygame.init()
-        pygame.mixer.music.play (- 1)
+        pygame.mixer.music.play(- 1)
         self.width = width
         self.length = length
         self.screen = pygame.display.set_mode((width, length))
@@ -33,7 +33,7 @@ class Game:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.bird.flap()
-                    pygame.mixer.Sound.play( Flap_sound ) 
+                    pygame.mixer.Sound.play(Flap_sound)
 
     # Permet la mise à jour des différents éléments du jeu
     def update(self):
@@ -89,11 +89,11 @@ class Game:
         pygame.quit()
 
 
-#Ajout de la musque
+# Ajout de la musque
 pygame.mixer.init()
-Flap_sound = pygame.mixer.Sound( "son/Flap.wav" )
+Flap_sound = pygame.mixer.Sound("son/Flap.wav")
 Flap_sound.set_volume(0.6)
-pygame.mixer.music.load( "son/musique.wav" ) 
+pygame.mixer.music.load("son/musique.wav")
 pygame.mixer.music.set_volume(0.4)
 
 # Lancer le jeu

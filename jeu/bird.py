@@ -5,14 +5,14 @@ fps = 60
 
 
 class Bird():
-    def __init__(self, x, y, type, gravity, screen_height):
-        if type == 'basic':
+    def __init__(self, x, y, type_oiseau, gravity, screen_height):
+        if type_oiseau == 'basic':
             self.images = [pygame.image.load('./sprites/bird_base/bird_base1.png'), pygame.image.load('./sprites/bird_base/bird_base2.png'),
                            pygame.image.load('./sprites/bird_base/bird_base3.png'), pygame.image.load('./sprites/bird_base/bird_base4.png')]
-        if type == 'angry':
+        elif type_oiseau == 'angry':
             self.images = [pygame.image.load(
                 './sprites/bird_angry/bird_angry' + str(i) + '.png') for i in range(1, 5)]
-        if type == 'rapide':
+        elif type_oiseau == 'rapide':
             self.images = [pygame.image.load(
                 './sprites/bird_rapide/bird_rapide' + str(i) + '.png') for i in range(1, 5)]
         else:
