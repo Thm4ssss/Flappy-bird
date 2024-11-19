@@ -14,7 +14,7 @@ class Game:
         self.length = length
         self.screen = pygame.display.set_mode((width, length))
         self.running = True
-        self.bird = Bird(40, 300, 'angry', 0.5, length)
+        self.bird = Bird(40, 300, 'rapide', 0.5, length)
         self.clock = pygame.time.Clock()
         self.background = Background('city')
         self.pipes = [Pipe(self.width, random.randint(100, 200), self.length, random.randint(

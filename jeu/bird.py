@@ -15,7 +15,7 @@ class Bird():
         if type == 'rapide':
             self.images = [pygame.image.load(
                 './sprites/bird_rapide/bird_rapide' + str(i) + '.png') for i in range(1, 5)]
-
+        self.compteur = 0
         self.index = 0
         self.image = self.images[self.index]
         self.rect = self.image.get_rect(center=(x, y))
@@ -50,12 +50,16 @@ class Bird():
 
     # gère l'animation de l'oiseau et la chute à chaque instant
     def update(self):
+        # mouvement vertical
         self.movement += self.gravity
         self.rect.y += self.movement
-        tirage = rd.random()
-        if tirage > 0.5:
-            self.index = (self.index + 1) % len(self.images)
+        # animation oiseau
+        self.compteur += 1
+        if self.compteur == 3
+        self.index = (self.index + 1) % len(self.images)
+        self.compteur = 0
         self.image = self.images[self.index]
+       # rotation de l'oiseau en fonction de sa vitesse verticale
         self.rotate()
 
     # afficher l'oiseau sur l'écran
