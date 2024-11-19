@@ -17,9 +17,10 @@ class Game:
                          './sprites/bird_base/bird_base3.png', './sprites/bird_base/bird_base4.png', 0.5, length)
         self.clock = pygame.time.Clock()
         self.background = pygame.image.load("Backgrounds/fond_base.png").convert()
-        self.pipes = [Pipe(self.width, random.randint(100,200),self.length,random.randint(100,300))]  # Générer un tuyau avec une hauteur aléatoire
+        self.pipes = []  # Générer un tuyau avec une hauteur aléatoire
         self.pipe_spawn_timer = 0  # Timer pour générer les tuyaux
         self.ground = ground(self.screen) # Importe le sol
+        self.start_game=False
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
@@ -62,8 +63,17 @@ class Game:
         self.ground.draw(self.screen) # Dessine le sol
         pygame.display.flip()
 
+    def check_if_the_game_has_started(self):
+        for event in pygame.event.get():
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_SPACE:
+                    self.start_game=True
+    
     def run(self):
         while self.running:
+            while self.start_game==False:
+                self.display()
+                self.check_if_the_game_has_started()
             self.clock.tick(60)  # Limiter à 60 FPS
             self.handling_events()  # Gestion des événements
             self.update()  # Mise à jour des objets
