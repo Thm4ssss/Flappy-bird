@@ -55,7 +55,7 @@ class Bird():
         self.rect.y += self.movement
         # animation oiseau
         self.compteur += 1
-        if self.compteur == 3
+        if self.compteur == 3:
         self.index = (self.index + 1) % len(self.images)
         self.compteur = 0
         self.image = self.images[self.index]
