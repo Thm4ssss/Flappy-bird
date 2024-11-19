@@ -29,7 +29,11 @@ class Game:
                 self.window_is_active = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    self.bird.flap()
+                    if not self.start_game:
+                        self.start_game=True
+                    else:
+                        self.bird.flap()
+                        
 
     # Permet la mise à jour des différents éléments du jeu
     def update(self):
@@ -62,12 +66,6 @@ class Game:
             pipe.display_pipe(self.screen)  # Dessiner les tuyaux
         self.ground.draw(self.screen) # Dessine le sol
         pygame.display.flip()
-
-    def check_if_the_game_has_started(self):
-        for event in pygame.event.get():
-            if event.type==pygame.KEYDOWN:
-                if event.key==pygame.K_SPACE:
-                    self.start_game=True
     
     def run(self):
         while self.window_is_active:
@@ -80,7 +78,6 @@ class Game:
             while self.start_game==False and self.window_is_active:
                     self.handling_events()
                     self.display()
-                    self.check_if_the_game_has_started()
             while self.running and self.window_is_active:
                 self.clock.tick(60)  # Limiter à 60 FPS
                 self.handling_events()  # Gestion des événements
