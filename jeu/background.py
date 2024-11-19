@@ -17,7 +17,7 @@ class Background():
 
     def update(self):
         self.compteur += 1
-        if self.compteur == 2:
+        if self.compteur == 3:
             self.compteur = 0
             self.index = (self.index + 1) % len(self.frames)
         self.image = self.frames[self.index]
