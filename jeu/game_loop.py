@@ -20,7 +20,7 @@ class Game:
         self.pipes = [Pipe(self.width, random.randint(100, 200), self.length, random.randint(
             100, 300))]  # Générer un tuyau avec une hauteur aléatoire
         self.pipe_spawn_timer = -1500  # Timer pour générer les tuyaux
-        self.ground = ground(self.screen)  # Importe le sol
+        self.ground = ground(self.screen, 'city')  # Importe le sol
         self.dev = False
         self.window_is_active=True
 
