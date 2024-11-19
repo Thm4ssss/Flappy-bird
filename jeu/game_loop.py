@@ -16,7 +16,7 @@ class Game:
                          './sprites/bird_base/bird_base3.png', './sprites/bird_base/bird_base4.png', 0.5, length)
         self.clock = pygame.time.Clock()
         self.background = pygame.image.load("Backgrounds/fond_base.png").convert()
-        self.pipes = [Pipe(self.width, random.randint(100,  300),random.randint(100,200))]  # Générer un tuyau avec une hauteur aléatoire
+        self.pipes = [Pipe(self.width, random.randint(100,  300),self.length)]  # Générer un tuyau avec une hauteur aléatoire
         self.pipe_spawn_timer = 0  # Timer pour générer les tuyaux
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
@@ -40,7 +40,7 @@ class Game:
         # Générer de nouveaux tuyaux toutes les X millisecondes
         self.pipe_spawn_timer += self.clock.get_time()
         if self.pipe_spawn_timer > 1500:  # Nouveau tuyau toutes les 1.5 secondes
-            self.pipes.append(Pipe(self.width, random.randint(100, 300),random.randint(100,400)))
+            self.pipes.append(Pipe(self.width, random.randint(100, 300),self.length))
             self.pipe_spawn_timer = 0
 
     def check_collisions(self):

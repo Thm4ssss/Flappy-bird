@@ -6,15 +6,15 @@ image_tuyau_bas = pygame.image.load("./sprites/tuyaux/image_tuyau_bas.png")
 
 
 class Pipe:
-    def __init__(self,screen_width,gap,height_of_pipe,image_top=image_tuyau_haut,image_bottom=image_tuyau_bas):
+    def __init__(self,screen_width,gap,screen_heigth,image_top=image_tuyau_haut,image_bottom=image_tuyau_bas):
         #Définition des variables utiles d'un tuyau, tel que la position (coin haut gauche, la vitesse de déplacement ou encore l'écart entre deux tuyaux)
         self.x=screen_width
         self.y=0
         self.speed=3
         self.gap=gap
-        self.height=height_of_pipe
-        self.image_top=pygame.transform.scale(image_top,(150,self.height))
-        self.image_bottom=pygame.transform.scale(image_bottom,(150,self.height))
+        self.height=(screen_heigth-gap)/2
+        self.image_top=pygame.transform.scale(image_top,(90,self.height))
+        self.image_bottom=pygame.transform.scale(image_bottom,(90,self.height))
         self.width=self.image_top.get_width()
         
         
