@@ -20,6 +20,7 @@ class Game:
         self.pipes = [Pipe(self.width, random.randint(100,200),self.length,random.randint(100,300))]  # Générer un tuyau avec une hauteur aléatoire
         self.pipe_spawn_timer = 0  # Timer pour générer les tuyaux
         self.ground = ground(self.screen) # Importe le sol
+        self.dev = True
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
@@ -55,12 +56,21 @@ class Game:
             self.running = False
 
     def display(self):
-        self.screen.blit(self.background, (0, 0))  # Dessiner le fond
-        self.bird.draw(self.screen)  # Dessiner l'oiseau
-        for pipe in self.pipes:
-            pipe.display_pipe(self.screen)  # Dessiner les tuyaux
-        self.ground.draw(self.screen) # Dessine le sol
-        pygame.display.flip()
+        if self.dev:
+            self.screen.fill((0,0,0))
+            pygame.draw.rect(self.screen, (255,0,0), self.bird.rect, 2)
+            pygame.draw.rect(self.screen, (255,255,0), self.ground.rect, 2)
+            for pipe in self.pipes:
+                pygame.draw.rect(self.screen, (255,255,255), pipe.top_rect, 2)
+                pygame.draw.rect(self.screen, (255,255,255), pipe.bottom_rect, 2)
+            pygame.display.flip()
+        else:
+            self.screen.blit(self.background, (0, 0))  # Dessiner le fond
+            self.bird.draw(self.screen)  # Dessiner l'oiseau
+            for pipe in self.pipes:
+                pipe.display_pipe(self.screen)  # Dessiner les tuyaux
+            self.ground.draw(self.screen) # Dessine le sol
+            pygame.display.flip()
 
     def run(self):
         while self.running:
