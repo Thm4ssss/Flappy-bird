@@ -11,14 +11,14 @@ class Pipe:
         self.y=0
         self.speed=3
         self.gap=gap
-        self.image_top=image_top
-        self.image_bottom=image_bottom
-        self.width=image_top.get_width()
-        self.height=image_top.get_height()
+        self.image_top=pygame.transform.scale(image_top,(100,100))
+        self.image_bottom=pygame.transform.scale(image_bottom,(100,100))
+        self.width=self.image_top.get_width()
+        self.height=self.image_top.get_height()
         
         #Définition de la hitbox
         self.top_rect=pygame.Rect(self.x,self.y,self.width,self.height)
-        self.bottom_rect=pygame.Rect(self.x,self.y+self.gap,self.width,900)
+        self.bottom_rect=pygame.Rect(self.x,self.height+self.gap,self.width,self.height)
         
     def update_pipe(self):
         #Déplacement horizontal du tuyau
