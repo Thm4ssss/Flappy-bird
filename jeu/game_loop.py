@@ -1,6 +1,7 @@
 import pygame
 from bird import Bird
 from pipe import Pipe
+from ground import ground
 import random
 
 
@@ -18,6 +19,7 @@ class Game:
         self.background = pygame.image.load("Backgrounds/fond_base.png").convert()
         self.pipes = [Pipe(self.width, random.randint(100,  300),random.randint(100,200))]  # Générer un tuyau avec une hauteur aléatoire
         self.pipe_spawn_timer = 0  # Timer pour générer les tuyaux
+        self.ground = ground(self.screen) # Importe le sol
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
@@ -31,6 +33,7 @@ class Game:
     # Permet la mise à jour des différents éléments du jeu
     def update(self):
         self.bird.update()  # Mettre à jour l'oiseau
+        self.ground.update() # Met à jour le sol
         for pipe in self.pipes:
             pipe.update_pipe()  # Mettre à jour les tuyaux
 
@@ -48,7 +51,7 @@ class Game:
             if pipe.check_collision(self.bird.rect):  # Si collision avec un tuyau
                 self.running = False
         # On vérifie si l'oiseau touche le sol, si c'est le cas il a perdu
-        if self.bird.rect.bottom >= self.length:
+        if self.ground.check_collision(self.bird.rect):
             self.running = False
 
     def display(self):
@@ -56,6 +59,7 @@ class Game:
         self.bird.draw(self.screen)  # Dessiner l'oiseau
         for pipe in self.pipes:
             pipe.display_pipe(self.screen)  # Dessiner les tuyaux
+        self.ground.draw(self.screen) # Dessine le sol
         pygame.display.flip()
 
     def run(self):

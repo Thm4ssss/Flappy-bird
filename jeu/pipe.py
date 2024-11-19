@@ -13,8 +13,8 @@ class Pipe:
         self.speed=3
         self.gap=gap
         self.height=height_of_pipe
-        self.image_top=pygame.transform.scale(image_top,(150,self.height))
-        self.image_bottom=pygame.transform.scale(image_bottom,(150,self.height))
+        self.image_top=pygame.transform.scale(image_top,(75,self.height))
+        self.image_bottom=pygame.transform.scale(image_bottom,(75,self.height))
         self.width=self.image_top.get_width()
         
         
