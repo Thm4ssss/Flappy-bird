@@ -73,5 +73,5 @@ class Game:
 
 
 # Lancer le jeu
-game = Game(950, 520)
+game = Game(900, 520)
 game.run()
