@@ -56,8 +56,8 @@ class Bird():
         # animation oiseau
         self.compteur += 1
         if self.compteur == 3:
-        self.index = (self.index + 1) % len(self.images)
-        self.compteur = 0
+            self.index = (self.index + 1) % len(self.images)
+            self.compteur = 0
         self.image = self.images[self.index]
        # rotation de l'oiseau en fonction de sa vitesse verticale
         self.rotate()
