@@ -15,6 +15,9 @@ class Bird():
         if type == 'rapide':
             self.images = [pygame.image.load(
                 './sprites/bird_rapide/bird_rapide' + str(i) + '.png') for i in range(1, 5)]
+        else:
+            self.images = [pygame.image.load(
+                './sprites/cat/cat' + str(i) + '.png') for i in range(1, 5)]
         self.compteur = 0
         self.index = 0
         self.image = self.images[self.index]
