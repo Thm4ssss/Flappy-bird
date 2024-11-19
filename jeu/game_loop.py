@@ -5,7 +5,6 @@ from ground import ground
 from background import Background
 import random
 
-
 class Game:
     # Constructeur de la classe game, permet de définir toutes les variables utiles au bon fonctionnement du jeu
     def __init__(self, width, length):
@@ -23,17 +22,22 @@ class Game:
         self.pipe_spawn_timer = -1500  # Timer pour générer les tuyaux
         self.ground = ground(self.screen)  # Importe le sol
         self.dev = False
+        self.window_is_active=True
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.running = False
+            if event.type ==pygame.QUIT: 
+                self.window_is_active = False
                 pygame.mixer.music.stop()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    self.bird.flap()
-                    pygame.mixer.Sound.play(Flap_sound)
+                    if not self.start_game:
+                        self.start_game=True
+                    else:
+                        self.bird.flap()
+                        pygame.mixer.Sound.play(Flap_sound)
+                        
 
     # Permet la mise à jour des différents éléments du jeu
     def update(self):
@@ -55,7 +59,7 @@ class Game:
     def check_collisions(self):
         for pipe in self.pipes:
             if pipe.check_collision(self.bird.rect):  # Si collision avec un tuyau
-                self.running = False
+                self.running=False
         # On vérifie si l'oiseau touche le sol, si c'est le cas il a perdu
         if self.ground.check_collision(self.bird.rect):
             self.running = False
@@ -80,21 +84,30 @@ class Game:
             pygame.display.flip()
 
     def run(self):
-        while self.running:
-            self.clock.tick(60)  # Limiter à 60 FPS
-            self.handling_events()  # Gestion des événements
-            self.update()  # Mise à jour des objets
-            self.check_collisions()  # Vérification des collisions
-            self.display()  # Affichage à l'écran
+        while self.window_is_active:
+            self.running = True
+            self.start_game = False
+            self.bird = Bird(40, 300,"basic", 0.5, self.length)
+            self.pipes = []
+            self.pipe_spawn_timer = 0
+            while self.start_game==False and self.window_is_active:
+                    self.handling_events()
+                    self.display()
+            while self.running and self.window_is_active:
+                self.clock.tick(60)  # Limiter à 60 FPS
+                self.handling_events()  # Gestion des événements
+                self.update()  # Mise à jour des objets
+                self.check_collisions()  # Vérification des collisions
+                self.display()  # Affichage à l'écran    
         pygame.quit()
 
 
 # Ajout de la musque
 pygame.mixer.init()
 Flap_sound = pygame.mixer.Sound("son/Flap.wav")
-Flap_sound.set_volume(0.6)
+Flap_sound.set_volume(0.99)
 pygame.mixer.music.load("son/musique.wav")
-pygame.mixer.music.set_volume(0.4)
+pygame.mixer.music.set_volume(0.3)
 
 # Lancer le jeu
 game = Game(900, 520)
