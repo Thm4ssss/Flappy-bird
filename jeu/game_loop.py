@@ -16,7 +16,7 @@ class Game:
                          './sprites/bird_base/bird_base3.png', './sprites/bird_base/bird_base4.png', 0.5, length)
         self.clock = pygame.time.Clock()
         self.background = pygame.image.load(
-            "Background/fond_base.png").convert()
+            "./Backgrounds/fond_base.png").convert()
         # Générer un tuyau avec une hauteur aléatoire
         self.pipes = [Pipe(self.width, random.randint(60,  100))]
         self.pipe_spawn_timer = 0  # Timer pour générer les tuyaux
