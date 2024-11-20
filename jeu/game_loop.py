@@ -27,7 +27,7 @@ class Game:
         self.window_is_active=True
         self.score = 0
         self.check_starting_menu=False
-        self.starting_menu=Starting_menu()
+        self.starting_menu=Starting_menu(self.screen)
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
@@ -85,6 +85,8 @@ class Game:
             self.bird.draw(self.screen)
             self.ground.draw(self.screen)
             self.starting_menu.draw(self.screen,(214, 122, 24))
+            self.starting_menu.draw_button_back()
+            self.starting_menu.draw_button_oiseau()
             pygame.display.flip()
         else:
             self.screen.blit(self.background.image, (0, 0))  # Dessiner le fond
