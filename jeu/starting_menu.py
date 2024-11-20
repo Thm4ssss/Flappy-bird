@@ -1,13 +1,15 @@
 import pygame
 from score import draw_text,Button
 
-restart_img = pygame.image.load('sprites/buttons/restart.png')
-restart_hovered_img = pygame.image.load('sprites/buttons/restart_hovered.png')
+background_img = pygame.image.load('sprites/buttons/background.png')
+Bird_img = pygame.image.load('sprites/buttons/Bird.png')
+Bird_hovered_img = pygame.image.load('sprites/buttons/Bird_hovered.png')
+background_hovered_img = pygame.image.load('sprites/buttons/background_hovered.png')
 
 class Starting_menu():
     def __init__(self,screen):
-      self.Button_oiseau = Button(screen.get_width()/2-60,200,restart_img,restart_hovered_img,screen)
-      self.Button_back = Button(screen.get_width()/2-60,300,restart_img,restart_hovered_img,screen)
+      self.Button_oiseau = Button(screen.get_width()/2-60,200,Bird_img,Bird_hovered_img,screen)
+      self.Button_back = Button(screen.get_width()/2-60,300,background_img,background_hovered_img,screen)
       
     def draw(self,screen,couleur):
         screen.blit(pygame.font.Font('police/Sabo-Regular.otf', 50).render('Floppy Bird',True,couleur),(screen.get_width()/2-pygame.font.Font('police/Sabo-Regular.otf', 50).render('Floppy Bird',True,couleur).get_width()/2,50))

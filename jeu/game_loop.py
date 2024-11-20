@@ -7,6 +7,8 @@ from score import draw_text,Button
 from starting_menu import Starting_menu
 import random
 
+back = ['city','jungle', 'volcan' , 'desert',-1]
+oiseau = ['basic','angry','rapide',-1]
 
 class Game:
     # Constructeur de la classe game, permet de définir toutes les variables utiles au bon fonctionnement du jeu
@@ -19,7 +21,7 @@ class Game:
         self.running = True
         self.bird = Bird(40, 300, 'basic', 0.5, length)
         self.clock = pygame.time.Clock()
-        self.background = Background('jungle')
+        self.background = Background('city')
         self.pipes = [Pipe(self.width, random.randint(100, 200), self.length, random.randint(
             100, 300))]  # Générer un tuyau avec une hauteur aléatoire
         self.pipe_spawn_timer = -1500  # Timer pour générer les tuyaux
@@ -30,6 +32,8 @@ class Game:
         self.pass_pipe = False  # Vérification de passage de tuyaux pour calcul de score
         self.check_starting_menu=False
         self.starting_menu=Starting_menu(self.screen)
+        self.background_select=0
+        self.oiseau_select=0
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
@@ -88,7 +92,17 @@ class Game:
             self.ground.draw(self.screen)
             self.starting_menu.draw(self.screen,(214, 122, 24))
             self.starting_menu.draw_button_back()
+            if self.starting_menu.draw_button_back():
+                self.background_select +=1
+                if self.background_select == len(back)-1:
+                    self.background_select=0
+                self.background = Background(back[self.background_select])
             self.starting_menu.draw_button_oiseau()
+            if self.starting_menu.draw_button_oiseau():
+                self.oiseau_select +=1
+                if self.oiseau_select == len(oiseau)-1:
+                    self.oiseau_select=0
+                self.bird = Bird(40, 300, oiseau[self.oiseau_select], 0.5, self.length)
             pygame.display.flip()
         else:
             self.screen.blit(self.background.image, (0, 0))  # Dessiner le fond
