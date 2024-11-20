@@ -3,6 +3,7 @@ from bird import Bird
 from pipe import Pipe
 from ground import ground
 from background import Background
+from score import draw_text,Button
 import random
 
 class Game:
@@ -23,6 +24,7 @@ class Game:
         self.ground = ground(self.screen)  # Importe le sol
         self.dev = False
         self.window_is_active=True
+        self.score = 0
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
@@ -81,7 +83,18 @@ class Game:
             for pipe in self.pipes:
                 pipe.display_pipe(self.screen)  # Dessiner les tuyaux
             self.ground.draw(self.screen)  # Dessine le sol
+            draw_text(str(self.score_value),pygame.font.SysFont('bauhaus93', 60),(255,255,255),int(self.width/2),20,self.screen) 
             pygame.display.flip()
+            
+    def update_score(self):
+        pass_pipe = False  # Vérifie si l'oiseau est passé par le tuyau
+        if len(self.pipes)>0:
+            if self.bird.rect[0] > self.pipes[0].bottom_rect.x and self.bird.rect[0] < self.pipes[0].bottom_rect.bottomright[0] and pass_pipe == False :
+                pass_pipe = True
+            if pass_pipe == True:
+                if self.bird.rect[0] > self.pipes[0].bottom_rect.bottomright[0] :
+                    self.score_value+=1
+                    pass_pipe = False
 
     def run(self):
         while self.window_is_active:
