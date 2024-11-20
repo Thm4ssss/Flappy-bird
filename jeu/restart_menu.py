@@ -19,17 +19,6 @@ class Restart_menu:
         self.restart_button.draw()
         self.quit_button.draw()
     
-pygame.init()
-fenetre=pygame.display.set_mode((900,520))
-restart_menu=Restart_menu(fenetre)
-running=True
-while running:
-    for event in pygame.event.get():
-        if event.type==pygame.QUIT:
-            running=False
-    pygame.time.Clock().tick(60)
-    restart_menu.display_restart_menu()
-    pygame.display.flip()
-pygame.quit()
+
     
         
