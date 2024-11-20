@@ -22,7 +22,7 @@ class Background():
 
         elif theme == 'usine':
             self.frames = [pygame.transform.scale(pygame.image.load("./Backgrounds/fond_usine/5a1f845c9be14088d2242bcb954995ccdIGDpvTc5BE0vmia-" + str(i) + ".png").convert(), (950, 520)) for i in range(
-                0, 304)] + [pygame.transform.scale(pygame.image.load("./Backgrounds/fond_usine/a973ea7540414e82cba8b838bd3e3d92gaDKDhmKvEmNLxKm-32" + str(i) + ".png").convert(), (950, 520)) for i in range(4, 35)]
+                0, 304)] + [pygame.transform.scale(pygame.image.load("./Backgrounds/fond_usine/a973ea7540414e82cba8b838bd3e3d92gaDKDhmKvEmNLxKm-" + str(i) + ".png").convert(), (950, 520)) for i in range(4, 35)]
 
         else:
             self.frames = [pygame.transform.scale(pygame.image.load(
