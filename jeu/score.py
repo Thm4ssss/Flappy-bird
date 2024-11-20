@@ -13,8 +13,7 @@ white =(255,255,255)
 def draw_text(text,font,text_color,x,y,screen):
     img = font.render(text,True,text_color)
     screen.blit(img,(x,y))
-      
-    
+            
 class Button():
     def __init__(self,x,y,image,image_hovered,screen):
         self.image = image
