@@ -21,6 +21,7 @@ class Button():
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
         self.screen = screen
+        self.clicked = False
     def draw(self):
         action = False
         
@@ -29,9 +30,11 @@ class Button():
         
         # Vérifie si la souris est sur le bouton
         if self.rect.collidepoint(pos):
-            if pygame.mouse.get_pressed()[0] == 1:
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
                 action = True
-        
+                self.clicked = True
+            if pygame.mouse.get_pressed()[0] == 0:
+                self.clicked = False
         # Fait apparaître le bouton
         if action == True:
             self.screen.blit(self.image_hovered, (self.rect.x,self.rect.y))
