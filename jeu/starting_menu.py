@@ -13,7 +13,7 @@ class Starting_menu():
       
     def draw(self,screen,couleur):
         screen.blit(pygame.font.Font('police/Sabo-Regular.otf', 50).render('Floppy Bird',True,couleur),(screen.get_width()/2-pygame.font.Font('police/Sabo-Regular.otf', 50).render('Floppy Bird',True,couleur).get_width()/2,50))
-        screen.blit(pygame.font.Font('police/Sabo-Regular.otf', 30).render('Press scpace-bar to play',True,(255,255,255)),(screen.get_width()/2-pygame.font.Font('police/Sabo-Regular.otf', 30).render('Press scpace-bar to play',True,(255,255,255)).get_width()/2,400))
+        screen.blit(pygame.font.Font('police/Sabo-Regular.otf', 30).render('Press space-bar to play',True,(255,255,255)),(screen.get_width()/2-pygame.font.Font('police/Sabo-Regular.otf', 30).render('Press space-bar to play',True,(255,255,255)).get_width()/2,400))
         
     def draw_button_oiseau(self):
         return self.Button_oiseau.draw()
