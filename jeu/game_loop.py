@@ -5,6 +5,7 @@ from ground import ground
 from background import Background
 import random
 
+
 class Game:
     # Constructeur de la classe game, permet de définir toutes les variables utiles au bon fonctionnement du jeu
     def __init__(self, width, length):
@@ -16,30 +17,30 @@ class Game:
         self.running = True
         self.bird = Bird(40, 300, 'basic', 0.5, length)
         self.clock = pygame.time.Clock()
-        self.background = Background('city')
+        self.background = Background('jungle')
         self.pipes = [Pipe(self.width, random.randint(100, 200), self.length, random.randint(
             100, 300))]  # Générer un tuyau avec une hauteur aléatoire
         self.pipe_spawn_timer = -1500  # Timer pour générer les tuyaux
-        self.ground = ground(self.screen, 'city')  # Importe le sol
+        self.ground = ground(self.screen, 'jungle')  # Importe le sol
         self.dev = False
-        self.window_is_active=True
+        self.window_is_active = True
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
         for event in pygame.event.get():
-            if event.type ==pygame.QUIT: 
+            if event.type == pygame.QUIT:
                 self.window_is_active = False
                 pygame.mixer.music.stop()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     if not self.start_game:
-                        self.start_game=True
+                        self.start_game = True
                     else:
                         self.bird.flap()
                         pygame.mixer.Sound.play(Flap_sound)
-                        
 
     # Permet la mise à jour des différents éléments du jeu
+
     def update(self):
         self.bird.update()  # Mettre à jour l'oiseau
         self.ground.update()  # Met à jour le sol
@@ -59,7 +60,7 @@ class Game:
     def check_collisions(self):
         for pipe in self.pipes:
             if pipe.check_collision(self.bird.rect):  # Si collision avec un tuyau
-                self.running=False
+                self.running = False
         # On vérifie si l'oiseau touche le sol, si c'est le cas il a perdu
         if self.ground.check_collision(self.bird.rect):
             self.running = False
@@ -87,18 +88,18 @@ class Game:
         while self.window_is_active:
             self.running = True
             self.start_game = False
-            self.bird = Bird(40, 300,"basic", 0.5, self.length)
+            self.bird = Bird(40, 300, "basic", 0.5, self.length)
             self.pipes = []
             self.pipe_spawn_timer = 0
-            while self.start_game==False and self.window_is_active:
-                    self.handling_events()
-                    self.display()
+            while self.start_game == False and self.window_is_active:
+                self.handling_events()
+                self.display()
             while self.running and self.window_is_active:
                 self.clock.tick(60)  # Limiter à 60 FPS
                 self.handling_events()  # Gestion des événements
                 self.update()  # Mise à jour des objets
                 self.check_collisions()  # Vérification des collisions
-                self.display()  # Affichage à l'écran    
+                self.display()  # Affichage à l'écran
         pygame.quit()
 
 
