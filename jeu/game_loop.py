@@ -22,9 +22,10 @@ class Game:
             100, 300))]  # Générer un tuyau avec une hauteur aléatoire
         self.pipe_spawn_timer = -1500  # Timer pour générer les tuyaux
         self.ground = ground(self.screen, 'city')  # Importe le sol
-        self.dev = False
+        self.dev = False   # Mode Développeur
         self.window_is_active=True
-        self.score = 0
+        self.score = 0  # Initialisation du score
+        self.pass_pipe = False  # Vérification de passage de tuyaux pour calcul de score
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
@@ -87,14 +88,13 @@ class Game:
             pygame.display.flip()
             
     def update_score(self):
-        pass_pipe = False  # Vérifie si l'oiseau est passé par le tuyau
         if len(self.pipes)>0:
-            if self.bird.rect[0] > self.pipes[0].bottom_rect.x and self.bird.rect[0] < self.pipes[0].bottom_rect.bottomright[0] and pass_pipe == False :
-                pass_pipe = True
-            if pass_pipe == True:
-                if self.bird.rect[0] > self.pipes[0].bottom_rect.bottomright[0] :
+            if self.bird.rect.x > self.pipes[0].x and self.bird.rect.x < self.pipes[0].x + self.pipes[0].width and self.pass_pipe == False :
+                self.pass_pipe = True
+            if self.pass_pipe == True:
+                if self.bird.rect[0] >= self.pipes[0].x +self.pipes[0].width :
                     self.score+=1
-                    pass_pipe = False
+                    self.pass_pipe = False
 
     def run(self):
         while self.window_is_active:
@@ -102,7 +102,8 @@ class Game:
             self.start_game = False
             self.bird = Bird(40, 300,"basic", 0.5, self.length)
             self.pipes = []
-            self.pipe_spawn_timer = 0
+            self.pipe_spawn_timer = 0 
+            self.score = 0
             while self.start_game==False and self.window_is_active:
                     self.handling_events()
                     self.display()
@@ -110,6 +111,7 @@ class Game:
                 self.clock.tick(60)  # Limiter à 60 FPS
                 self.handling_events()  # Gestion des événements
                 self.update()  # Mise à jour des objets
+                self.update_score()
                 self.check_collisions()  # Vérification des collisions
                 self.display()  # Affichage à l'écran    
         pygame.quit()
