@@ -98,16 +98,15 @@ class Game:
             self.bird.draw(self.screen)
             self.ground.draw(self.screen)
             self.starting_menu.draw(self.screen,(214, 122, 24))
-            self.starting_menu.draw_button_back()
             if self.starting_menu.draw_button_back():
                 self.background_select +=1
-                if self.background_select == len(back)-1:
+                if self.background_select == len(back):
                     self.background_select=0
                 self.background = Background(back[self.background_select])
                 
             if self.starting_menu.draw_button_oiseau():
                 self.oiseau_select +=1
-                if self.oiseau_select == len(oiseau)-1:
+                if self.oiseau_select == len(oiseau):
                     self.oiseau_select=0
                 self.bird = Bird(40, 300, oiseau[self.oiseau_select], 0.5, self.length)
             pygame.display.flip()

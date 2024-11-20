@@ -4,6 +4,7 @@ import pygame
 class Background():
     def __init__(self, theme):
         self.index = 0
+        self.theme=theme
         if theme == 'jungle':
             self.frames = [pygame.transform.scale(pygame.image.load(
                 "./Backgrounds/fond_jungle/642d6d07-391c-4d40-b591-f63836213a92-" + str(i) + ".png").convert(), (950, 520)) for i in range(0, 300)]
@@ -26,7 +27,7 @@ class Background():
 
         else:
             self.frames = [pygame.transform.scale(pygame.image.load(
-                "./Backgrounds/fond_base").convert(), (950, 520))]
+                "./Backgrounds/fond_base.png").convert(), (950, 520))]
 
         self.image = self.frames[self.index]
         self.compteur = 0
