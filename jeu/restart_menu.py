@@ -11,17 +11,21 @@ class Restart_menu:
     
     #on affiche les différents élements du menu 
     def display_restart_menu(self):
-        draw_text("GAME OVER",pygame.font.SysFont('bauhaus93', 60),(255,240,240),(self.screen_width/2)-40,(self.screen_height/2)-50,self.screen)
+        text="GAME OVER"
+        font=pygame.font.SysFont('bauhaus93',60)
+        img=font.render(text,True,(255,240,240))
+        img_rect=img.get_rect(center=(self.screen_width/2,(self.screen_height/2)-100))
+        self.screen.blit(img,img_rect)
         self.restart_button.draw()
         self.quit_button.draw()
     
-    
+pygame.init()
 fenetre=pygame.display.set_mode((900,520))
 restart_menu=Restart_menu(fenetre)
 running=True
 while running:
     for event in pygame.event.get():
-        if event==pygame.QUIT:
+        if event.type==pygame.QUIT:
             running=False
     pygame.time.Clock().tick(60)
     restart_menu.display_restart_menu()
