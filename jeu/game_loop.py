@@ -4,6 +4,7 @@ from pipe import Pipe
 from ground import ground
 from background import Background
 from score import draw_text,Button
+from starting_menu import Starting_menu
 import random
 
 class Game:
@@ -25,6 +26,8 @@ class Game:
         self.dev = False
         self.window_is_active=True
         self.score = 0
+        self.check_starting_menu=False
+        self.starting_menu=Starting_menu()
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
@@ -77,13 +80,19 @@ class Game:
                 pygame.draw.rect(self.screen, (255, 255, 255),
                                  pipe.bottom_rect, 2)
             pygame.display.flip()
+        if self.check_starting_menu:
+            self.screen.blit(self.background.image, (0, 0))
+            self.bird.draw(self.screen)
+            self.ground.draw(self.screen)
+            self.starting_menu.draw(self.screen,(214, 122, 24))
+            pygame.display.flip()
         else:
             self.screen.blit(self.background.image, (0, 0))  # Dessiner le fond
             self.bird.draw(self.screen)  # Dessiner l'oiseau
             for pipe in self.pipes:
                 pipe.display_pipe(self.screen)  # Dessiner les tuyaux
             self.ground.draw(self.screen)  # Dessine le sol
-            draw_text(str(self.score),pygame.font.SysFont('bauhaus93', 60),(255,255,255),int(self.width/2),20,self.screen) 
+            draw_text(str(self.score),pygame.font.SysFont('bauhaus93', 60),(255,255,255),int(self.width/2),20,self.screen)
             pygame.display.flip()
             
     def update_score(self):
@@ -95,7 +104,8 @@ class Game:
                 if self.bird.rect[0] > self.pipes[0].bottom_rect.bottomright[0] :
                     self.score+=1
                     pass_pipe = False
-
+ 
+        
     def run(self):
         while self.window_is_active:
             self.running = True
@@ -105,8 +115,10 @@ class Game:
             self.pipe_spawn_timer = 0
             while self.start_game==False and self.window_is_active:
                     self.handling_events()
+                    self.check_starting_menu = True
                     self.display()
             while self.running and self.window_is_active:
+                self.check_starting_menu= False
                 self.clock.tick(60)  # Limiter à 60 FPS
                 self.handling_events()  # Gestion des événements
                 self.update()  # Mise à jour des objets
