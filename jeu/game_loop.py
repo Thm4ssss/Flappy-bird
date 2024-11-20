@@ -3,7 +3,10 @@ from bird import Bird
 from pipe import Pipe
 from ground import ground
 from background import Background
-from score import draw_text, Button
+<<<<<<< jeu/game_loop.py
+from score import draw_text,Button
+from starting_menu import Starting_menu
+>>>>>>> jeu/game_loop.py
 import random
 
 
@@ -23,10 +26,14 @@ class Game:
             100, 300))]  # Générer un tuyau avec une hauteur aléatoire
         self.pipe_spawn_timer = -1500  # Timer pour générer les tuyaux
         self.ground = ground(self.screen, 'city')  # Importe le sol
+<<<<<<< jeu/game_loop.py
         self.dev = False   # Mode Développeur
         self.window_is_active = True
         self.score = 0  # Initialisation du score
         self.pass_pipe = False  # Vérification de passage de tuyaux pour calcul de score
+        self.check_starting_menu=False
+        self.starting_menu=Starting_menu(self.screen)
+>>>>>>> jeu/game_loop.py
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
@@ -79,17 +86,28 @@ class Game:
                 pygame.draw.rect(self.screen, (255, 255, 255),
                                  pipe.bottom_rect, 2)
             pygame.display.flip()
+        if self.check_starting_menu:
+            self.screen.blit(self.background.image, (0, 0))
+            self.bird.draw(self.screen)
+            self.ground.draw(self.screen)
+            self.starting_menu.draw(self.screen,(214, 122, 24))
+            self.starting_menu.draw_button_back()
+            self.starting_menu.draw_button_oiseau()
+            pygame.display.flip()
         else:
             self.screen.blit(self.background.image, (0, 0))  # Dessiner le fond
             self.bird.draw(self.screen)  # Dessiner l'oiseau
             for pipe in self.pipes:
                 pipe.display_pipe(self.screen)  # Dessiner les tuyaux
             self.ground.draw(self.screen)  # Dessine le sol
+<<<<<<< jeu/game_loop.py
             draw_text(str(self.score), pygame.font.SysFont(
                 'bauhaus93', 60), (255, 255, 255), int(self.width/2), 20, self.screen)
+>>>>>>> jeu/game_loop.py
             pygame.display.flip()
 
     def update_score(self):
+<<<<<<< jeu/game_loop.py
         if len(self.pipes) > 0:
             if self.bird.rect.x > self.pipes[0].x and self.bird.rect.x < self.pipes[0].x + self.pipes[0].width and self.pass_pipe == False:
                 self.pass_pipe = True
@@ -98,6 +116,7 @@ class Game:
                     self.score += 1
                     self.pass_pipe = False
 
+>>>>>>> jeu/game_loop.py
     def run(self):
         while self.window_is_active:
             self.running = True
@@ -105,11 +124,15 @@ class Game:
             self.bird = Bird(40, 300, "basic", 0.5, self.length)
             self.pipes = []
             self.pipe_spawn_timer = 0
+<<<<<<< jeu/game_loop.py
             self.score = 0
             while self.start_game == False and self.window_is_active:
                 self.handling_events()
+                self.check_starting_menu = True
                 self.display()
+>>>>>>> jeu/game_loop.py
             while self.running and self.window_is_active:
+                self.check_starting_menu= False
                 self.clock.tick(60)  # Limiter à 60 FPS
                 self.handling_events()  # Gestion des événements
                 self.update()  # Mise à jour des objets
