@@ -39,6 +39,7 @@ class Game:
         self.game_over = False
         self.restart_menu = Restart_menu(self.screen)
         self.ground_select = 0
+        self.score_max=0
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
@@ -123,9 +124,12 @@ class Game:
             self.restart_menu.display_restart_menu()
             draw_text("Score: "+str(self.score), pygame.font.SysFont(
                 'bauhaus93', 60), (255, 255, 255), int(self.width/2)-pygame.font.SysFont(
-                'bauhaus93', 60).render("Score: "+str(self.score), True, (255, 255, 255)).get_width()/2, (self.length/2)-50, self.screen)
+                'bauhaus93', 60).render("Score: "+str(self.score), True, (255, 255, 255)).get_width()/2, (self.length/2)-150, self.screen)
+            draw_text("Best Score: "+str(self.score_max),pygame.font.SysFont(
+                'bauhaus93', 60), (255, 255, 255), int(self.width/2)-pygame.font.SysFont(
+                'bauhaus93', 60).render("Best Score: "+str(self.score_max), True, (255, 255, 255)).get_width()/2, (self.length/2)-50, self.screen)
             pygame.display.flip()
-
+            
         else:
             self.screen.blit(self.background.image, (0, 0))  # Dessiner le fond
             self.bird.draw(self.screen)  # Dessiner l'oiseau
@@ -168,6 +172,8 @@ class Game:
                 self.check_collisions()  # Vérification des collisions
                 self.display()  # Affichage à l'écran
             self.game_over = True
+            if self.score>self.score_max:
+                self.score_max=self.score
             while self.game_over and self.window_is_active:
                 self.handling_events()
                 self.display()
