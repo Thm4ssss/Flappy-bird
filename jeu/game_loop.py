@@ -119,7 +119,8 @@ class Game:
             self.ground.draw(self.screen)  # Dessine le sol
             self.restart_menu.display_restart_menu()
             draw_text("Score: "+str(self.score), pygame.font.SysFont(
-                'bauhaus93', 60), (255, 255, 255), int(self.width/2)-100,(self.length/2)-50, self.screen) 
+                'bauhaus93', 60), (255, 255, 255), int(self.width/2)-pygame.font.SysFont(
+                'bauhaus93', 60).render("Score: "+str(self.score),True,(255, 255, 255)).get_width()/2,(self.length/2)-50, self.screen) 
             pygame.display.flip()
             
         else:
@@ -147,7 +148,7 @@ class Game:
             self.running = True
             self.start_game = False
             self.game_over=False
-            self.bird = Bird(40, 300, back[self.background_select], 0.5, self.length)
+            self.bird = Bird(40, 300, oiseau[self.oiseau_select], 0.5, self.length)
             self.pipes = []
             self.pipe_spawn_timer = 0
             self.score = 0

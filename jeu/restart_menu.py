@@ -12,7 +12,7 @@ class Restart_menu:
     #on affiche les différents élements du menu 
     def display_restart_menu(self):
         text="GAME OVER"
-        font=pygame.font.SysFont('bauhaus93',60)
+        font=pygame.font.Font('police/Sabo-Regular.otf', 50)
         img=font.render(text,True,(255,240,240))
         img_rect=img.get_rect(center=(self.screen_width/2,(self.screen_height/2)-100))
         self.screen.blit(img,img_rect)
