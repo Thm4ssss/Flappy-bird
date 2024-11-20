@@ -83,7 +83,7 @@ class Game:
             for pipe in self.pipes:
                 pipe.display_pipe(self.screen)  # Dessiner les tuyaux
             self.ground.draw(self.screen)  # Dessine le sol
-            draw_text(str(self.score_value),pygame.font.SysFont('bauhaus93', 60),(255,255,255),int(self.width/2),20,self.screen) 
+            draw_text(str(self.score),pygame.font.SysFont('bauhaus93', 60),(255,255,255),int(self.width/2),20,self.screen) 
             pygame.display.flip()
             
     def update_score(self):
@@ -93,7 +93,7 @@ class Game:
                 pass_pipe = True
             if pass_pipe == True:
                 if self.bird.rect[0] > self.pipes[0].bottom_rect.bottomright[0] :
-                    self.score_value+=1
+                    self.score+=1
                     pass_pipe = False
 
     def run(self):

@@ -21,6 +21,7 @@ class Button():
         self.image_hovered = image_hovered
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
+        self.screen = screen
     def draw(self):
         action = False
         
@@ -34,8 +35,8 @@ class Button():
         
         # Fait apparaître le bouton
         if action == True:
-            screen.blit(self.image_hovered, (self.rect.x,self.rect.y))
+            self.screen.blit(self.image_hovered, (self.rect.x,self.rect.y))
         else:
-            screen.blit(self.image, (self.rect.x,self.rect.y))
+            self.screen.blit(self.image, (self.rect.x,self.rect.y))
         
         return action
