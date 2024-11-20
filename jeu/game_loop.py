@@ -38,6 +38,7 @@ class Game:
         self.oiseau_select = 0
         self.game_over = False
         self.restart_menu = Restart_menu(self.screen)
+        self.ground_select = 0
 
     # Permet la gestion des intéractions entre l'utilisateur et le jeu
     def handling_events(self):
@@ -105,6 +106,7 @@ class Game:
                 if self.background_select == len(back):
                     self.background_select=0
                 self.background = Background(back[self.background_select])
+                self.ground = ground(self.screen, back[self.background_select])
 
             if self.starting_menu.draw_button_oiseau():
                 self.oiseau_select +=1
