@@ -1,4 +1,4 @@
-# Semaine 2 2048
+# Projet CodingWeeks 2048: Codage d'un clone de Flappy Bird
 ## Présentation du projet
 L'objectif de notre projet est de coder, via le module pygame, un *clone* du célèbre __jeu flappy bird.__ Nous utiliserons la __programmation orientée objet__ pour mener à bien ce projet et obtenir un code final __propre__ et bien __structuré__.
 
