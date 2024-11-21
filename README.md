@@ -4,8 +4,8 @@ L'objectif de notre projet est de coder, via le module pygame, un *clone* du cé
 
 ## Guide d'installation
 #### Pour accéder à notre jeu et y jouer, il faut suivre les instructions suivantes:
-* Cloner le dépôt dans votre explorateur de fichier à l'aide de la commande bash: git clone https://gitlab-cw1.centralesupelec.fr/thomas.banzet/projet-2048-cw.git
-* __Installer les bibliothèques__ nécessaires pour le fonctionnement du jeu. Pour cela, tapez la commande bash : *pip install -r requirements.txt*. Il se peut que celle-ci __renvoie une erreur__ si pip n'est pas reconnu en tant que variable d'environnement. Dans ce cas, tapez: *py-m pip install -r requirements.txt*
+* Cloner le dépôt dans votre explorateur de fichier à l'aide de la commande bash: 'git clone https://gitlab-cw1.centralesupelec.fr/thomas.banzet/projet-2048-cw.git'
+* __Installer les bibliothèques__ nécessaires pour le fonctionnement du jeu. Pour cela, tapez la commande bash : 'pip install -r requirements.txt'. Il se peut que celle-ci __renvoie une erreur__ si pip n'est pas reconnu en tant que variable d'environnement. Dans ce cas, tapez: 'py-m pip install -r requirements.txt'
 * Ouvrir le fichier __game_loop.py__ dans votre éditeur de code, puis __executez le__. Une fenêtre pygame devrait s'ouvrir, et vous vous retrouverez alors dans le menu de démarrage du jeu. C'est fait, le jeu est lancé et *vous pouvez vous amuser !*
 
 ## Les différents Jalons à atteindre
