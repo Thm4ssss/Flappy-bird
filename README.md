@@ -30,3 +30,14 @@ Au cours de cette semaine de travail, nous avons réaliser complètement les __J
 * Les différents fichiers pipe.py, ground.py, bird.py contiennent les classes permettant de définir les différents éléments du jeu.Toute l'importance de la Programmation Orientée Objet s'illustre parfaitement dans la gestion des tuyaux. En effet, les tuyaux à faire apparaître possèdent tous des caractéristiques communes, et seul l'écart entre les tuyaux et leur taille varie. La création d'une classe tuyaux simplifie donc grandement leur création
 * Les autres fichiers python offrent à l'utilisateur une expérience plus immersive et dynamique, avec nottament les __menus de début et de fin de partie__ mais aussi la __gestion du score__ !
 * Enfin, les autres fichiers regroupent les ressources graphiques qui ont permis la bonne réalisation du jeu, avec nottament les __images de fond__, __des oiseaux__ ou encore des __tuyaux__ !
+
+##### Pourquoi ces choix de conceptions ?
+* Utilisation de Pygame pour simplifier grandement la gestion des événements
+* L'importance de la Programmation Orientée Objet s'illustre parfaitement dans la gestion des tuyaux. En effet, les tuyaux à faire apparaître possèdent tous des caractéristiques communes, et seul l'écart entre les tuyaux et leur taille varie. La création d'une classe tuyaux simplifie donc grandement leur création. De la même façon pour la classe Bird, en relançant une partie il suffit de créer une nouvelle instance de la classe
+
+## La répartition des tâches
+* Création des backgrounds animés et implémentation finale des power-ups: __Macéo__
+* Création de la game loop, du système de création et d'apparition des tuyaux, menus: __Thomas__
+* Création du système de score et d'une solution pour le compter, implémentation score max: __Wiktor__
+* Création du sol animé et du menus et sons: __Arthur__
+* Coordination entre les membres du groupe, gestion des power-ups et création menus : __Gabriel__
