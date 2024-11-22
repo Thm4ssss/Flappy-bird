@@ -101,7 +101,7 @@ class Game:
         self.powerups_spawn_timer += self.clock.get_time()
         if self.powerups_spawn_timer > 18000 and self.pipe_spawn_timer > 750:
             # tous les 12 tuyaux, 40% de chance de faire apparaître un powerup
-            if random.random() > 0.6:
+            if random.random() > 0:
                 L = [Inverse_gravity(self.width, self.length),
                      Acceleration(self.width, self.length)]
                 # choix aléatoire du nouveau powerup parmi ceux disponibles
