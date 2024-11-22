@@ -7,6 +7,7 @@ fps = 60
 
 class Bird():
     def __init__(self, x, y, type_oiseau, screen_height):
+        # Chaque oiseau a un skin et un poids différent
         if type_oiseau == 'basic':
             self.images = [pygame.image.load('./sprites/bird_base/bird_base1.png'), pygame.image.load('./sprites/bird_base/bird_base2.png'),
                            pygame.image.load('./sprites/bird_base/bird_base3.png'), pygame.image.load('./sprites/bird_base/bird_base4.png')]
@@ -23,14 +24,21 @@ class Bird():
             self.images = [pygame.image.load(
                 './sprites/cat/cat' + str(i) + '.png') for i in range(1, 5)]
             self.poids = 0.5
-        self.compteur = 0
+
+        self.compteur = 0       # on ne change pas l'image de l'oiseau pour l'animer à chaque frame
+
+        # Définitions liées aux sprites
+        # Images
         self.index = 0
         self.image = self.images[self.index]
+        # Hitboxes
         self.rect = self.image.get_rect(center=(x, y))
+        # Définitions liées au mouvement de l'oiseau
         self.movement = 0
         self.coeff_grav = 1
         self.gravity = 30*self.coeff_grav*self.poids/fps
         self.jump_strength = 10 * 30 / fps  # Force du saut
+
         self.height = screen_height
 
     # pour réinitialiser la position de l'oiseau si jamais on le réutilise 2 fois d'affilée
@@ -51,7 +59,6 @@ class Bird():
             self.movement = self.jump_strength
 
     # rotation de l'oiseau en fonction de sa vitesse de chute
-
     def rotate(self):
         # Limiter l'angle de rotation pour éviter des rotations excessives
         max_rotation = 25
@@ -89,6 +96,7 @@ class Bird():
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
+    # fonction liée au powerup de changement de gravité
     def apply_gravity_inversion(self):
         self.coeff_grav *= -1
         self.gravity = 30*self.coeff_grav*self.poids/fps

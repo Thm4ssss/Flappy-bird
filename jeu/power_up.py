@@ -2,9 +2,12 @@ import pygame
 import random as rd
 from abc import ABC, abstractmethod
 
+# On définit une classe abstraite générale PowerUp
+
 
 class PowerUp(ABC):
     def __init__(self, screen_width, screen_height):
+        # Definition de la position et de la vitesse
         self.x = screen_width
         self.speed = 3
         self.min_y = screen_height/2 - 100
@@ -12,13 +15,17 @@ class PowerUp(ABC):
         self.y = rd.randint(int(self.min_y)+1, int(self.max_y))
         self.vertical_speed = 2  # Vitesse du mouvement vertical
         self.direction = 1  # 1 pour descendre, -1 pour monter
+        # Definition des sprites
         self.index = 0
         self.images = [pygame.image.load('./sprites/Reverse/reverse1.png')]
         self.image = self.images[self.index]
+        # Definition de la hitbox
         self.rect = self.image.get_rect(center=(self.x, self.y))
+        # Definition de l'état du power-up
         self.active = False
 
-    def update_powerup(self, screen_height):
+    def update_powerup(self):
+        # Si le power-up n'a pas encore appliqué d'effet, il est dit inactif, dans ce cas on l'affiche de la même façon que les pipes
         if not self.active:
             # Déplacement horizontal du powerup
             self.x -= self.speed
@@ -26,10 +33,9 @@ class PowerUp(ABC):
             # Changement de l'image dans l'animation du power-up
             self.index = (self.index + 1) % len(self.images)
             self.image = self.images[self.index]
-        # Déplacement vertical du powerup
+            # Déplacement vertical du powerup
             self.y += self.vertical_speed * self.direction
             self.rect.y = self.y
-
             # Inverser la direction si les limites sont atteintes
             if self.y <= self.min_y or self.y >= self.max_y:
                 self.direction *= -1
@@ -57,6 +63,8 @@ class PowerUp(ABC):
     def speed_down(self):
         self.speed = 3
 
+    # Definition de méthodes abstraites qui permettront de définir l'effet associé à chaque type de power-up
+
     @abstractmethod
     def apply_effect(self, bird, pipes_list, powerups_list):
         pass
@@ -64,6 +72,8 @@ class PowerUp(ABC):
     @abstractmethod
     def delete_effect(self, bird, pipes_list, powerups_list):
         pass
+
+# On définit maintenant des sous-classe de PowerUp, qui cette fois sont des classe réelles
 
 
 class Inverse_gravity(PowerUp):
@@ -74,6 +84,7 @@ class Inverse_gravity(PowerUp):
         # définition de la hitbox
         self.rect = self.image.get_rect(center=(self.x, self.y))
 
+    # Effet : l'oiseau est retouné, par l'effet de la gravité il ira vers le haut de l'écran, et si on saute, vers le bas
     def apply_effect(self, bird, pipes_list, powerups_list):
         bird.apply_gravity_inversion()
 
@@ -89,6 +100,7 @@ class Acceleration(PowerUp):
         # définition de la hitbox
         self.rect = self.image.get_rect(center=(self.x, self.y))
 
+    # Effet : on augmente la vitesse de défillement des tuyaux et powerups susceptibles d'arriver
     def apply_effect(self, bird, pipes_list, powerups_list):
         for pipe in pipes_list:
             pipe.speed_up()
