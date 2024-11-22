@@ -3,7 +3,7 @@ from bird import Bird
 from pipe import Pipe
 from ground import ground
 from background import Background
-from power_up import Inverse_gravity
+from power_up import PowerUp, Inverse_gravity, Acceleration
 from score import draw_text, Button
 from starting_menu import Starting_menu
 import random
@@ -93,14 +93,20 @@ class Game:
         # Retirer les tuyaux sortis de l'écran
         self.pipes = [pipe for pipe in self.pipes if pipe.x + pipe.width > 0]
 
-        # Génération aléatoire des powerups entre les tuyaux (tous les 8 tuyaux, 30% de chance de faire apparaître un powerup)
+        # Génération aléatoire des powerups entre les tuyaux
         self.powerups_spawn_timer += self.clock.get_time()
-        if self.powerups_spawn_timer > 12000 and self.pipe_spawn_timer > 600 and self.pipe_spawn_timer < 800:
-            if random.random() > 0.5:
-                new_powerup = Inverse_gravity(self.width, self.length)
+        if self.powerups_spawn_timer > 18000 and self.pipe_spawn_timer > 750:
+            # tous les 12 tuyaux, 40% de chance de faire apparaître un powerup
+            if random.random() > 0.6:
+                L = [Inverse_gravity(self.width, self.length),
+                     Acceleration(self.width, self.length)]
+                # choix aléatoire du nouveau powerup parmi ceux disponibles
+                indice_powerup_generated = random.randint(0, len(L)-1)
+                new_powerup = L[indice_powerup_generated]
                 self.powerups.append(new_powerup)
                 self.powerups_durations[new_powerup] = 660
             self.powerups_spawn_timer = 0
+            self.pipe_spawn_timer = 0
 
         # Actualiser le timer des powerups actifs
         for powerup in self.powerups:
@@ -117,7 +123,7 @@ class Game:
                 self.powerups.append(powerup)
                 self.powerups_durations[powerup] = actual_powerups_durations[powerup]
             elif actual_powerups_durations[powerup] <= 0:
-                powerup.delete_effect(self.bird)
+                powerup.delete_effect(self.bird, self.pipes, self.powerups)
                 powerup.deactivate()
             else:
                 powerup.deactivate()
@@ -137,6 +143,11 @@ class Game:
                 self.effet_noir = True
                 pygame.mixer.Sound.play(Powerup_loose_sound)
 
+        # On applique les effets des powerups à long terme
+        for powerup in self.powerups:
+            if type(powerup) in [Acceleration] and powerup.active:
+                powerup.apply_effect(self.bird, self.pipes, self.powerups)
+
         self.bird.update()  # Mettre à jour l'oiseau
 
     def check_collisions(self):
@@ -151,11 +162,11 @@ class Game:
             self.effet_noir = False
             self.compteur_frames_effet_noir = 0
 
-        # Activer les powerups entrés en collision avec l'oiseau
+        # Activer les powerups à usage unique entrés en collision avec l'oiseau
         for powerup in self.powerups:
             if powerup.check_collision(self.bird.rect) and not powerup.active:
                 powerup.activate()
-                powerup.apply_effect(self.bird)
+                powerup.apply_effect(self.bird, self.pipes, self.powerups)
                 pygame.mixer.Sound.play(Powerup_get_sound)
                 self.effet_noir = True
 

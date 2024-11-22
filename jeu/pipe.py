@@ -42,3 +42,9 @@ class Pipe:
         # On affiche les tuyaux
         screen.blit(self.image_top, (self.x, self.y))
         screen.blit(self.image_bottom, (self.x, self.top_height+self.gap))
+
+    def speed_up(self):
+        self.speed = 4
+
+    def speed_down(self):
+        self.speed = 3

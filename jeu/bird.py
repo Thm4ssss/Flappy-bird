@@ -81,7 +81,7 @@ class Bird():
        # flip de l'image si la gravité est inversée
         self.image = pygame.transform.flip(self.image, False, True)
 
-       # rotation de l'oiseau en fonction de sa vitesse verticale
+        # rotation + remettre l'image à l'endroit si la gravité est normale
         if self.coeff_grav > 0:
             self.rotate()
 
