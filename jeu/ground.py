@@ -7,6 +7,12 @@ class ground:
             self.image = pygame.image.load('sprites/ground/ground_jungle.png')
         elif theme == 'city':
             self.image = pygame.image.load('sprites/ground/ground_city.png')
+        elif theme == 'desert':
+            self.image = pygame.image.load('sprites/ground/ground_desert.png')
+        elif theme == 'volcan':
+            self.image = pygame.image.load('sprites/ground/ground_volcan.png')
+        elif theme == 'usine':
+            self.image = pygame.image.load('sprites/ground/ground_usine.png')
         else:
             self.image = pygame.image.load('sprites/ground/ground.png')
         self.x = 0
